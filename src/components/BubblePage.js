@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
-
-import { editColorService, deleteColorService } from '../services/colorServices';
-import fetchColorService from '../services/fetchColorService';
+// import { editColorService, deleteColorService } from '../services/colorServices';
+// import fetchColorService from '../services/fetchColorService';
+import {axiosWithAuth } from './../helpers/axiosWithAuth';
 
 const BubblePage = () => {
   const [colors, setColors] = useState([]);
@@ -19,6 +18,17 @@ const BubblePage = () => {
 
   const deleteColor = (colorToDelete) => {
   };
+
+  useEffect(() => {
+    axiosWithAuth()
+    .get('api/colors')
+    .then((res) => {
+      setColors(res.data)
+    })
+    .catch((error) => {
+      return (error, 'error')
+    })
+  }, [])
 
   return (
     <div className="container">
