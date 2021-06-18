@@ -18,16 +18,15 @@ const Login = () => {
   }
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const login = (e) => {
+  const fetchingData = (e) => {
   e.preventDefault();
   axios.post(`'http://localhost:5000/api'/login`, userInformation)
   .then(res => {
-    console.log('happy path!', res.data.payload);
     localStorage.setItem('token', res.data.payload)
     push('/protected')
   })
   .catch(error => {
-    console.log(error, 'oops, something went wrong!')
+    return (error)
   })
 
   // useEffect(()=>{
@@ -49,17 +48,17 @@ return (
     <h1>Welcome to the Bubble App!</h1>
     <div data-testid="loginForm" className="login-form">
       <h2>Build login form here</h2>
-      <form onSubmit={login}>
+      <form onSubmit={fetchingData}>
         <input 
-        name='username' 
-        placeholder= 'username' 
+        name='Username' 
+        placeholder= 'Username' 
         type='text' 
         onChange={handleChange} 
         value={userInformation.username} />
         <input 
-        name='password' 
-        placeholder= 'password' 
-        type='password' 
+        name='Password' 
+        placeholder= 'Password' 
+        type='Password' 
         onChange={handleChange} 
         value={userInformation.password} />
          <button>Login</button>
